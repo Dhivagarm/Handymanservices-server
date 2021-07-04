@@ -9,7 +9,8 @@ const auth=async (req,res,next)=>{
         const token= req.header('Authorization').replace('Bearer ','')
         const decoded =jwt.verify(token,process.env.JWT_SECRET)
         const user= await User.findOne({ _id:decoded._id,})
-
+        console.log(localStorage.getItem('token'));
+        console.log(token);
         if(!user || localStorage.getItem('token')!=token ){
             throw new Error()
         }
